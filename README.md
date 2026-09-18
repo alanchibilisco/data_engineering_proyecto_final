@@ -53,9 +53,6 @@ más?, ¿qué licencias predominan?, ¿cuánto se concentra el mercado?
 
 ```
 data_engineering_proyecto_final/
-├── job-databricks.yml                  # Definición del job (bundle)
-├── dahsboard/
-│   └── querys-dashboard.sql            # Queries del dashboard (solo vistas semánticas)
 ├── src/
 │   ├── DDL/                            # DDL canónicos (celdas %sql)
 │   │   ├── setup.ipynb                 # Catálogo, schemas, volumen, ingestion_control
@@ -74,7 +71,7 @@ data_engineering_proyecto_final/
 │       ├── bronze/eda_bronze.ipynb
 │       ├── silver/eda_silver.ipynb
 │       └── gold/eda_gold.ipynb
-└── querys_prueba_proyecto_final_ia.dbquery.ipynb
+└──
 ```
 
 > **Nota**: los notebooks se ensamblan manualmente en el workspace de Databricks
@@ -103,7 +100,7 @@ Gold   (Star Schema: dim_fecha, dims SCD1, dim_modelo_scd2, fact_metricas_diaria
 Semántica (pf.semantic.vw_*)  →  Dashboard SQL
 ```
 
-Detalle completo en [`docs/02_arquitectura.md`](docs/02_arquitectura.md).
+Detalle completo en [`arquitectura.md`](arquitectura.md).
 
 ---
 
@@ -124,8 +121,6 @@ el código re-adjunta `tzinfo=UTC`). Parámetros por defecto: `catalog="pf"`,
 ---
 
 ## Orquestación (job diario)
-
-Definido en `job-databricks.yml`:
 
 - **Schedule**: todos los días a las 10:00 (zona `America/Argentina/Tucuman`).
 - **Cadena de tareas**:
@@ -152,7 +147,6 @@ Definido en `job-databricks.yml`:
 | 9 | `vw_kpi_concentracion` | Concentración del mercado (top-10 %) |
 | 10 | `vw_kpi_calidad` | Calidad del pipeline (data quality) |
 
-Explicación detallada en [`docs/03_explicacion_kpis.md`](docs/03_explicacion_kpis.md).
 
 ---
 
@@ -162,8 +156,6 @@ El proyecto responde preguntas como: ¿qué modelos y organizaciones dominan el
 ecosistema?, ¿qué tareas crecen más rápido?, ¿qué licencias predominan y cuánto
 del catálogo es reutilizable (open-weight)?, ¿cuán concentrado está el mercado?,
 ¿qué modelos tienen mejor relación likes/descargas?
-
-Análisis completo en [`docs/04_problemas_de_negocio.md`](docs/04_problemas_de_negocio.md).
 
 ---
 
@@ -180,14 +172,4 @@ Análisis completo en [`docs/04_problemas_de_negocio.md`](docs/04_problemas_de_n
 5. **Dashboard**: las queries de `dahsboard/querys-dashboard.sql` consumen
    exclusivamente `pf.semantic.vw_*`.
 
-> **Importante**: el bundle `job-databricks.yml` contiene un host de workspace
-> placeholder y requiere la variable `sql_warehouse_id`; no se deben agregar
-> credenciales reales al repositorio.
-
 ---
-
-## Documentación relacionada
-
-- [`docs/02_arquitectura.md`](docs/02_arquitectura.md) — arquitectura y flujo de datos
-- [`docs/03_explicacion_kpis.md`](docs/03_explicacion_kpis.md) — definición de KPIs
-- [`docs/04_problemas_de_negocio.md`](docs/04_problemas_de_negocio.md) — casos de uso de negocio
