@@ -80,7 +80,7 @@ ingesta el catálogo público de modelos de Hugging Face y lo transforma en un
 
 El watermark (`watermark_after`) se calcula como el máximo `lastModified`
 observado en la corrida (o el timestamp de corrida). Spark devuelve timestamps
-**naive UTC**; el código re-adjunta `tzinfo=UTC` antes de comparar.
+**native UTC**; el código re-adjunta `tzinfo=UTC` antes de comparar.
 
 ---
 
@@ -170,7 +170,7 @@ Normalización con `spark.sql`:
   `dim_licencia`. FKs declaradas como constraints en el DDL.
 - **Métricas**:
   - `likes`, `downloads`: snapshot del día.
-  - `delta_downloads`: `downloads_hoy - downloads_día_anterior` (se backfill
+  - `delta_downloads`: `downloads_hoy - downloads_día_anterior` (es backfill
     para `fecha_id = hoy`; `NULL`/0 el primer día).
   - `es_primer_dia`: `TRUE` si el modelo aparece por primera vez (se usa para
     contar modelos nuevos sin duplicar snapshots).
@@ -200,10 +200,10 @@ Normalización con `spark.sql`:
 |---|---|
 | `vw_modelos_bi` | Vista maestra: modelo, nombre, organización, fecha, fecha_creación, descargas, likes, delta, tarea, librería, licencia (oculta los joins del star schema) |
 | `vw_series_temporales` | Serie temporal por modelo: fecha (snapshot), fecha_creación, tarea, descargas, likes, delta |
-| `vw_kpi_*` (10 vistas) | Ver [`docs/03_explicacion_kpis.md`](03_explicacion_kpis.md) |
+| `vw_kpi_*` (10 vistas) | Ver [`./_explicacion_kpis.md`](explicacion_kpis.md) |
 
 **Regla**: el dashboard **solo** lee `pf.semantic.vw_*`, nunca tablas Gold
-físicas. Las queries de `dahsboard/querys-dashboard.sql` cumplen esta regla.
+físicas.
 
 ---
 
@@ -220,9 +220,6 @@ físicas. Las queries de `dahsboard/querys-dashboard.sql` cumplen esta regla.
 ---
 
 ## 8. Orquestación (Databricks Jobs)
-
-**Archivo**: `job-databricks.yml` (bundle)
-
 ```
 ingesta (mode=incremental)
   └─ bronze_csv_a_delta
@@ -240,7 +237,6 @@ ingesta (mode=incremental)
 - **Schedule**: `0 0 10 * * ?` (10:00, `America/Argentina/Tucuman`), activo.
 - **Notificaciones**: email en start/success/failure.
 - **Dashboard**: la última tarea refresca el dashboard SQL
-  (`dashboard_id` + `warehouse_id` en el bundle).
 
 ---
 
