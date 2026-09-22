@@ -1,4 +1,3 @@
-<img width="1007" height="991" alt="dahsboard-hugging-face" src="https://github.com/user-attachments/assets/8035373f-9402-4f67-b9ab-a7ab56d7aa80" />
 # Proyecto Final — Pipeline Medallion de Modelos de IA (Hugging Face)
 
 Pipeline de datos **Medallion (Bronze → Silver → Gold → Semántica)** construido en
@@ -172,7 +171,9 @@ del catálogo es reutilizable (open-weight)?, ¿cuán concentrado está el merca
    orden: bronze → silver → gold → semántica).
 5. **Dashboard**: las queries de `dahsboard/querys-dashboard.sql` consumen
    exclusivamente `pf.semantic.vw_*`.
-
-<img width="1703" height="696" alt="jobs-taks" src="https://github.com/user-attachments/assets/4f614c58-0fa5-4e70-ac4e-75421b9e67c8" />
-<img width="1703" height="930" alt="jobs-runs" src="https://github.com/user-attachments/assets/1df6a891-1adb-4137-8af1-65450175391f" />
-<img width="1007" height="991" alt="dahsboard-hugging-face" src="https://github.com/user-attachments/assets/fe6e7fe6-d9c7-4ed2-8d1c-60be8cc63a1b" />
+   
+<p align="center">
+  <img width="1703" height="696" alt="jobs-taks" src="https://github.com/user-attachments/assets/4f614c58-0fa5-4e70-ac4e-75421b9e67c8" />
+  <img width="1703" height="930" alt="jobs-runs" src="https://github.com/user-attachments/assets/1df6a891-1adb-4137-8af1-65450175391f" />
+  <img width="1007" height="991" alt="dahsboard-hugging-face" src="https://github.com/user-attachments/assets/fe6e7fe6-d9c7-4ed2-8d1c-60be8cc63a1b" />
+</p>
